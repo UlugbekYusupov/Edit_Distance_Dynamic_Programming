@@ -1,48 +1,8 @@
-#include<stdio.h> 
 #include<iostream>
 #include<string>
 #include<algorithm>
-
 using namespace std;
 
-int min(int x, int y, int z)
-{
-	return min(min(x, y), z);
-}
-
-int Edit_Distance(string str1, string str2, int m, int n, int count)
-{
-	count++;
-	if (m == 0) return n;
-	if (n == 0) return m;
-
-	if (str1[m - 1] == str2[n - 1])
-		return Edit_Distance(str1, str2, m - 1, n - 1, count);
-
-	return 1 + min(Edit_Distance(str1, str2, m, n - 1, count),
-		Edit_Distance(str1, str2, m - 1, n, count),
-		Edit_Distance(str1, str2, m - 1, n - 1, count)
-	);
-}	
-
-int main()
-{
-	string str1, str2;
-	cin >> str1;
-	cin >> str2;
-	int  count = 0;
-	cout << Edit_Distance(str1, str2, str1.length(), str2.length(), count) << endl;
-	cout << count;
-
-	_getch()
-	return 0;
-}
-#include<stdio.h> 
-#include<iostream>
-#include<string>
-
-using namespace std;
-int count = 0;
 int min(int x, int y, int z)
 {
 	return min(min(x, y), z);
@@ -50,10 +10,8 @@ int min(int x, int y, int z)
 
 int Edit_Distance(string str1, string str2, int m, int n)
 {
-	int** dp = new int*[m];
-	for (int i = 0; i < m; ++i)
-		dp[i] = new int[n];
 
+	int dp[300][300];
 	for (int i = 0; i <= m; i++)
 	{
 		for (int j = 0; j <= n; j++)
@@ -71,6 +29,12 @@ int Edit_Distance(string str1, string str2, int m, int n)
 		}
 	}
 
+	for (int i = 0; i <= m; i++) {
+		for (int j = 0; j <= n; j++) {
+			cout << dp[i][j] << " ";
+		}
+		cout << endl;
+	}
 	return dp[m][n];
 }
 int main()
@@ -79,7 +43,7 @@ int main()
 	cin >> str1;
 	cin >> str2;
 
-	cout << Edit_Distance(str1, str2, str1.length(), str2.length()) << endl;
+	cout << Edit_Distance(str1, str2, str1.length(), str2.	length()) << endl;
 
 	return 0;
 }
